@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./style/App.scss";
+const fetch = require("node-fetch");
 function Exchanges({ title, exchanges }) {
   const [price, setPrice] = useState(null);
   useEffect(() => {
