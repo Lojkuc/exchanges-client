@@ -3,7 +3,7 @@ import "./style/App.scss";
 function App() {
   return (
     <div className="App">
-      <Exchanges exchanges="binance" />
+//       <Exchanges exchanges="binance" />
       <Exchanges exchanges="kucoin" />
       <Exchanges exchanges="huobi" />
     </div>
