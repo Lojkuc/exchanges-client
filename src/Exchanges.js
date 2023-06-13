@@ -7,7 +7,7 @@ function Exchanges({ title, exchanges }) {
     const fetchPrice = async () => {
       try {
         const response = await fetch(
-          `http://server-exchanges.onrender.com/coinPrice`
+          `https://server-exchanges.onrender.com/coinPrice`
         );
         console.log(response);
         const data = await response.json();
