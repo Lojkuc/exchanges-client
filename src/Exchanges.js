@@ -13,7 +13,7 @@ function Exchanges({ title, exchanges }) {
         const data = await response.json();
         setPrice(data[`${exchanges}`].price);
       } catch (error) {
-        console.error("Failed to fetch Binance price:", error);
+        console.error(`Failed to fetch ${exchanges} price:`, error);
       }
     };
     setInterval(() => {
