@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import "./style/App.scss";
 const fetch = require("node-fetch");
-function Exchanges({ title, exchanges }) {
+function Exchanges({ title, exchanges, srcLogo }) {
   const [price, setPrice] = useState(null);
   useEffect(() => {
+    // Функция для получения цены с биржи Binance
     const fetchPrice = async () => {
       try {
         const response = await fetch(
           `https://server-exchanges.onrender.com/coinPrice`
         );
-        console.log(response);
         const data = await response.json();
         setPrice(data[`${exchanges}`].price);
       } catch (error) {
-        console.error(`Failed to fetch ${exchanges} price:`, error);
+        console.error("Failed to fetch Binance price:", error);
       }
     };
     setInterval(() => {
@@ -23,8 +23,11 @@ function Exchanges({ title, exchanges }) {
 
   return (
     <div className="Exchanges">
-      <h2 className="Exchanges-name">{exchanges}</h2>
-      <p className="Exchanges-price">{price}$</p>
+      <div className="Exchanges-name">
+        <img src={srcLogo} alt="logo" />
+        <h2>{exchanges}</h2>
+      </div>
+      <p className="Exchanges-price">Futures price: {price} $</p>
     </div>
   );
 }
