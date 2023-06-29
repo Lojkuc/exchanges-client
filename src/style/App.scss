@@ -1,17 +1,20 @@
 .App{
+  max-width: 1200px;
+  margin: 0 auto;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
+  flex-direction: column;
   column-gap: 20px;
   align-items: center;
   justify-content: center;
   
 }
-.Exchanges{
+.Exchanges-block{
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
- 
+  column-gap: 30px;
+ margin-bottom: 50px;
 }
 .Exchanges-name{
   display: flex;
@@ -25,7 +28,29 @@
     height: 100px;
   }
 }
-.Exchanges-price{
-  font-size: 20px;
-  border-bottom: 2px solid black;
+.table{
+  margin-top: 20px;
+  font-size: 25px;
+  td{
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+  }
+}
+.Chart-block{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 20px;
+  width: 100%;
+}
+.Chart-form{
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  *{
+    padding: 10px;
+    font-size: 30px;
+  }
 }
