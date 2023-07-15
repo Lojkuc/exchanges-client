@@ -1,5 +1,4 @@
 import React from "react";
-import "../style/App.scss";
 import {
   LineChart,
   Line,
@@ -11,20 +10,31 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const Chart = ({ data, selectedGraph }) => {
-  const minData = Math.min.apply(
-    0,
-    data.map((el) => el.order_buy_1)
+const Chart = ({ data, selectedGraph1, selectedGraph2 }) => {
+  const minData = Math.min(
+    ...data.map((el) => Math.min(el[selectedGraph1], el[selectedGraph2]))
   );
+
   return (
-    <ResponsiveContainer width={"100%"} height={1000}>
-      <LineChart className="graph" width={600} height={600} data={data}>
+    <ResponsiveContainer width={"100%"} height={400}>
+      <LineChart width={600} height={400} data={data}>
+        <CartesianGrid stroke="#ccc" />
         <XAxis dataKey="date" />
         <YAxis domain={[minData, "auto"]} />
-        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey={selectedGraph} stroke="blue" />
+        <Line
+          type="monotone"
+          dataKey={selectedGraph1}
+          stroke="blue"
+          name={`${selectedGraph1} (Биржа 1)`}
+        />
+        <Line
+          type="monotone"
+          dataKey={selectedGraph2}
+          stroke="red"
+          name={`${selectedGraph2} (Биржа 2)`}
+        />
       </LineChart>
     </ResponsiveContainer>
   );

@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import "../style/App.scss";
-
 const fetch = require("node-fetch");
 
-function Exchanges({ exchanges, srcLogo }) {
+function Exchanges({ exchanges, srcLogo, coin, click }) {
   const [prices, setPrices] = useState({
     priceBuy1: null,
     priceSell1: null,
@@ -17,28 +16,29 @@ function Exchanges({ exchanges, srcLogo }) {
     const fetchPrices = async () => {
       try {
         const response = await fetch(
-          `https://jellyfish-app-hmfiz.ondigitalocean.app/getDBase/${exchanges}`
+          `https://jellyfish-app-hmfiz.ondigitalocean.app/getCurrentlyData?exchange=${exchanges}&symbol=${coin}`
         );
+        // const response = await fetch(
+        //   `http://localhost:8080/getCurrentlyData?exchange=${exchanges}&symbol=${coin}`
+        // );
         const data = await response.json();
-        const latestData = data.data[data.data.length - 1];
         setPrices({
-          priceBuy1: latestData.order_buy_1,
-          priceSell1: latestData.order_sell_1,
-          priceBuy5: latestData.order_buy_5,
-          priceSell5: latestData.order_sell_5,
-          priceBuy10: latestData.order_buy_10,
-          priceSell10: latestData.order_sell_10,
+          priceBuy1: data[0].order_buy_1,
+          priceSell1: data[0].order_sell_1,
+          priceBuy5: data[0].order_buy_5,
+          priceSell5: data[0].order_sell_5,
+          priceBuy10: data[0].order_buy_10,
+          priceSell10: data[0].order_sell_10,
         });
       } catch (error) {
         console.error(`Failed to fetch ${exchanges} price:`, error);
       }
     };
-
     fetchPrices();
     const interval = setInterval(fetchPrices, 60000);
 
     return () => clearInterval(interval);
-  }, [exchanges]);
+  }, [exchanges, coin]);
 
   return (
     <div className="Exchanges">
